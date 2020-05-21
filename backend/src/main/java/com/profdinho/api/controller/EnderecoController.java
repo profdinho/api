@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.profdinho.api.model.Endereco;
 import com.profdinho.api.service.EnderecoService;
@@ -18,7 +19,7 @@ import com.profdinho.api.service.EnderecoService;
 @RestController
 public class EnderecoController {
 	
-	private static final Logger logger = Logger.getLogger(EnderecoController.class);
+	private static final Logger logger = LoggerFactory.getLogger(EnderecoController.class);
 	
 	@Autowired EnderecoService enderecoService;
 	
@@ -27,10 +28,10 @@ public class EnderecoController {
 		Endereco endereco = new Endereco();
 		try {
 			endereco = enderecoService.buscarEndereco(cep);
-			logger.info(endereco);
+			logger.info("Endereço retornado: {}", endereco);
 		}
 		catch(Exception e) {
-			logger.error(e);
+			logger.error("Erro: ", e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 		return ResponseEntity.ok(endereco);
@@ -41,10 +42,10 @@ public class EnderecoController {
 		List<Endereco> listaEnderecos = new ArrayList<Endereco>();
 		try {
 			listaEnderecos = enderecoService.buscarCEP(uf, cidade, logradouro);
-			logger.info(listaEnderecos);
+			logger.info("Endereços retornados: {}", listaEnderecos);
 		}
 		catch(Exception e) {
-			logger.error(e);
+			logger.error("Erro: ", e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}		
 		return ResponseEntity.ok(listaEnderecos);
