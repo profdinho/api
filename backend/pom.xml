@@ -12,7 +12,7 @@
 	<groupId>com.profdinho</groupId>
 	<artifactId>api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>api</name>
+	<name>API-Backend</name>
 	<description>API para utilização em aula</description>
 	
 	<developers>
