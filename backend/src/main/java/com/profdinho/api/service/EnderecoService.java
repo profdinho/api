@@ -26,7 +26,6 @@ public class EnderecoService {
 	}
 	
 	public List<Endereco> buscarCEP(String uf, String cidade, String logradouro){
-		System.out.println(URL_END.replace("{uf}", uf).replace("{cid}", cidade).replace("{log}", logradouro));
 		return restTemplate.exchange(URL_END.replace("{uf}", uf).replace("{cid}", cidade).replace("{log}", logradouro),
 									HttpMethod.GET,
 									null,
