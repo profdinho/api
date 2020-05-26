@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @Api(value = "Endereco")
+@RequestMapping({"/endereco"})
 public class EnderecoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EnderecoController.class);
@@ -32,7 +34,7 @@ public class EnderecoController {
 			value = "Buscar um endereço", 
 			response = Endereco.class, 
 			notes = "Essa operação busca um endereço através de um CEP informado.")
-	@GetMapping(path = "/endereco/{cep}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/{cep}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Endereco> buscarEndereco(@PathVariable("cep") String cep) {
 		Endereco endereco = new Endereco();
 		try {
@@ -50,7 +52,7 @@ public class EnderecoController {
 			value = "Buscar uma lista de CEPS",
 			response = List.class,
 			notes = "Essa operação busca uma lista de CEPs através de um endereço informado.")
-	@GetMapping(path = "/endereco/{uf}/{cidade}/{logradouro}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/{uf}/{cidade}/{logradouro}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Endereco>> buscarCEP(@PathVariable("uf") String uf, @PathVariable("cidade") String cidade, @PathVariable("logradouro") String logradouro){
 		List<Endereco> listaEnderecos = new ArrayList<Endereco>();
 		try {
