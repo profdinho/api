@@ -28,7 +28,7 @@ public class Contato {
 	private String nome;
 	private String email;
 	private String celular;
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
 
 }
