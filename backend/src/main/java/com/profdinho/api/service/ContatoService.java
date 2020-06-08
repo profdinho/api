@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 
 import com.profdinho.api.model.Contato;
 import com.profdinho.api.repository.ContatoRepository;
@@ -14,21 +17,25 @@ public class ContatoService {
 	
 	@Autowired ContatoRepository contatoRepo;
 
-	public List<Contato> buscarContatos() {
+	@Cacheable(cacheNames = "Contato", key="#root.method.name")
+    public List<Contato> buscarContatos() {
 		List<Contato> lista = new ArrayList<Contato>();
 		lista = (List<Contato>) contatoRepo.findAll();
 		return lista;
 	}
 
+	@Cacheable(cacheNames = "Contato", key="#identifier")
 	public Contato buscarContato(Long id) {
 		
 		return contatoRepo.findById(id).orElse(new Contato());
 	}
 	
+	@CacheEvict(cacheNames = "Contato", allEntries = true)
 	public Contato adicionarContato(Contato contato) {
 		return contatoRepo.save(contato);
 	}
 
+	@CachePut(cacheNames = "Contato", key="#company.getIdentifier()")
 	public ResponseEntity<Contato> atualizarContato(Long id, Contato contato) {
 		return contatoRepo.findById(id)
 						.map(registro -> {
@@ -42,6 +49,7 @@ public class ContatoService {
 						.orElse(ResponseEntity.notFound().build());
 	}
 
+	@CacheEvict(cacheNames = "Contato", key="#identifier")
 	public ResponseEntity<?> apagarContato(Long id) {
 		return contatoRepo.findById(id)
 						.map(registro -> {
