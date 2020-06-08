@@ -13,14 +13,20 @@ import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "Contato")
-public class Contato {
+public class Contato implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 176079068356549956L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

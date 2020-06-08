@@ -39,10 +39,25 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 	
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+		//registry.addResourceHandler("/api/**").addResourceLocations("classpath:/META-INF/resources/");
+		
 		registry.addResourceHandler("swagger-ui.html")
 		.addResourceLocations("classpath:/META-INF/resources/");
 		
 		registry.addResourceHandler("/webjars/**")
 		.addResourceLocations("classpath:/META-INF/resources/webjars/");
+		
 	}
+	/*
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+	    registry.addRedirectViewController("/api/v2/api-docs", "/v2/api-docs");
+	    registry.addRedirectViewController("/api/configuration/ui", "/configuration/ui");
+	    registry.addRedirectViewController("/api/configuration/security", "/configuration/security");
+	    registry.addRedirectViewController("/api/swagger-resources", "/swagger-resources");
+	    registry.addRedirectViewController("/api", "/api/swagger-ui.html");
+	    registry.addRedirectViewController("/api/", "/api/swagger-ui.html");
+	}
+	*/
+
 }
