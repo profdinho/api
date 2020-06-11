@@ -22,9 +22,6 @@ import java.io.Serializable;
 @Table(name = "Contato")
 public class Contato implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 176079068356549956L;
 
 	@Id
