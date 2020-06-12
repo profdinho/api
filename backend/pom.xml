@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.profdinho</groupId>
 	<artifactId>api</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>API-Backend</name>
 	<description>API para utilização em aula</description>
 	
